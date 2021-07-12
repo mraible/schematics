@@ -37,7 +37,7 @@
     "semver": "7.3.5"
   },
   "devDependencies": {
-    "@types/jasmine": "3.7.2",
+    "@types/jasmine": "3.8.1",
     "@types/node": "15.0.2",
     "@types/semver": "7.3.5",
     "chalk": "4.1.1",
