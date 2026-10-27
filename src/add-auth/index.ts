@@ -229,6 +229,15 @@ export function addAuth(options: any): Rule {
           options.style = 'css';
         }
       }
+
+      // Angular 20+ names files without a type suffix (app.ts, class App)
+      const appPath = join(normalize(projectPath), 'src/app');
+      const suffixless = host.exists(join(appPath, 'app.ts'));
+      options.suffix = suffixless ? '' : '.component';
+      options.homeClass = suffixless ? 'Home' : 'HomeComponent';
+      // Keep the providers that ng new adds to app.config.ts
+      const appConfig = host.read(join(appPath, 'app.config.ts'))?.toString() || '';
+      options.errorListeners = appConfig.includes('provideBrowserGlobalErrorListeners');
     }
 
     if (framework == IONIC_ANGULAR) {
