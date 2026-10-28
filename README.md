@@ -422,7 +422,7 @@ See [Ionic's iOS](https://ionicframework.com/docs/developing/ios) and [Android D
 Create a new React Native project with the React Native CLI. 
 
 ```
-npx react-native init SecureApp
+npx @react-native-community/cli@20.2.0 init SecureApp
 ```
 
 Then, integrate your React Native app with [Okta](#okta-for-react-native) or [Auth0](#auth0-for-react-native).
