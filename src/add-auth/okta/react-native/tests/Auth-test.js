@@ -71,8 +71,10 @@ describe('authentication flow', () => {
   });
 
   it('should return user profile information from id token', async () => {
-    // id_token returns { a: 'b' }
-    OktaSdkBridge.getIdToken.mockResolvedValue({ id_token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhIjoiYiJ9.jiMyrsmD8AoHWeQgmxZ5yq8z0lXS67_QGs52AzC8Ru8' });
+    // An unsigned test token whose payload is { a: 'b' }
+    const encode = value => Buffer.from(JSON.stringify(value)).toString('base64url');
+    const idToken = [encode({ alg: 'none', typ: 'JWT' }), encode({ a: 'b' }), 'signature'].join('.');
+    OktaSdkBridge.getIdToken.mockResolvedValue({ id_token: idToken });
     await render(<Auth />);
     await login();
     await fireEvent.press(screen.getByText('Get User From Id Token'));
